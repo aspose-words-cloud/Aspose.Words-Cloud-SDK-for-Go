@@ -55,6 +55,9 @@ type RenderTableOnlineRequest struct {
     Optionals map[string]interface{}
 }
 
+func (data *RenderTableOnlineRequest) GetOriginalRequest() RequestInterface {
+    return data
+}
 
 func (data *RenderTableOnlineRequest) CreateRequestData() (RequestData, error) {
     var result RequestData

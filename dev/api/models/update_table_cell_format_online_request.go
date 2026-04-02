@@ -59,6 +59,9 @@ type UpdateTableCellFormatOnlineRequest struct {
     Optionals map[string]interface{}
 }
 
+func (data *UpdateTableCellFormatOnlineRequest) GetOriginalRequest() RequestInterface {
+    return data
+}
 
 func (data *UpdateTableCellFormatOnlineRequest) CreateRequestData() (RequestData, error) {
     var result RequestData

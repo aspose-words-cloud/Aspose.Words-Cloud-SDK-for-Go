@@ -56,6 +56,9 @@ type InsertRunOnlineRequest struct {
     Optionals map[string]interface{}
 }
 
+func (data *InsertRunOnlineRequest) GetOriginalRequest() RequestInterface {
+    return data
+}
 
 func (data *InsertRunOnlineRequest) CreateRequestData() (RequestData, error) {
     var result RequestData

@@ -55,6 +55,9 @@ type DeleteBordersRequest struct {
     Optionals map[string]interface{}
 }
 
+func (data *DeleteBordersRequest) GetOriginalRequest() RequestInterface {
+    return data
+}
 
 func (data *DeleteBordersRequest) CreateRequestData() (RequestData, error) {
     var result RequestData

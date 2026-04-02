@@ -53,6 +53,9 @@ type GetDocumentDrawingObjectOleDataRequest struct {
     Optionals map[string]interface{}
 }
 
+func (data *GetDocumentDrawingObjectOleDataRequest) GetOriginalRequest() RequestInterface {
+    return data
+}
 
 func (data *GetDocumentDrawingObjectOleDataRequest) CreateRequestData() (RequestData, error) {
     var result RequestData

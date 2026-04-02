@@ -45,6 +45,9 @@ type CreateFolderRequest struct {
     Optionals map[string]interface{}
 }
 
+func (data *CreateFolderRequest) GetOriginalRequest() RequestInterface {
+    return data
+}
 
 func (data *CreateFolderRequest) CreateRequestData() (RequestData, error) {
     var result RequestData

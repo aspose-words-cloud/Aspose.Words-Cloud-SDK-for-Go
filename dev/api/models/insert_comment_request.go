@@ -56,6 +56,9 @@ type InsertCommentRequest struct {
     Optionals map[string]interface{}
 }
 
+func (data *InsertCommentRequest) GetOriginalRequest() RequestInterface {
+    return data
+}
 
 func (data *InsertCommentRequest) CreateRequestData() (RequestData, error) {
     var result RequestData

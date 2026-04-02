@@ -52,6 +52,9 @@ type GetDocumentDrawingObjectByIndexOnlineRequest struct {
     Optionals map[string]interface{}
 }
 
+func (data *GetDocumentDrawingObjectByIndexOnlineRequest) GetOriginalRequest() RequestInterface {
+    return data
+}
 
 func (data *GetDocumentDrawingObjectByIndexOnlineRequest) CreateRequestData() (RequestData, error) {
     var result RequestData

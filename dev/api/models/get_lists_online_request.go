@@ -48,6 +48,9 @@ type GetListsOnlineRequest struct {
     Optionals map[string]interface{}
 }
 
+func (data *GetListsOnlineRequest) GetOriginalRequest() RequestInterface {
+    return data
+}
 
 func (data *GetListsOnlineRequest) CreateRequestData() (RequestData, error) {
     var result RequestData

@@ -55,6 +55,9 @@ type MergeWithNextRequest struct {
     Optionals map[string]interface{}
 }
 
+func (data *MergeWithNextRequest) GetOriginalRequest() RequestInterface {
+    return data
+}
 
 func (data *MergeWithNextRequest) CreateRequestData() (RequestData, error) {
     var result RequestData

@@ -54,6 +54,9 @@ type CompressDocumentRequest struct {
     Optionals map[string]interface{}
 }
 
+func (data *CompressDocumentRequest) GetOriginalRequest() RequestInterface {
+    return data
+}
 
 func (data *CompressDocumentRequest) CreateRequestData() (RequestData, error) {
     var result RequestData

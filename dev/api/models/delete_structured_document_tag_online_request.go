@@ -54,6 +54,9 @@ type DeleteStructuredDocumentTagOnlineRequest struct {
     Optionals map[string]interface{}
 }
 
+func (data *DeleteStructuredDocumentTagOnlineRequest) GetOriginalRequest() RequestInterface {
+    return data
+}
 
 func (data *DeleteStructuredDocumentTagOnlineRequest) CreateRequestData() (RequestData, error) {
     var result RequestData

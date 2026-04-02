@@ -54,6 +54,9 @@ type DeleteAllParagraphTabStopsOnlineRequest struct {
     Optionals map[string]interface{}
 }
 
+func (data *DeleteAllParagraphTabStopsOnlineRequest) GetOriginalRequest() RequestInterface {
+    return data
+}
 
 func (data *DeleteAllParagraphTabStopsOnlineRequest) CreateRequestData() (RequestData, error) {
     var result RequestData

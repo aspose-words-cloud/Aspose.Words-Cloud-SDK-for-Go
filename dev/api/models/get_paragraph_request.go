@@ -54,6 +54,9 @@ type GetParagraphRequest struct {
     Optionals map[string]interface{}
 }
 
+func (data *GetParagraphRequest) GetOriginalRequest() RequestInterface {
+    return data
+}
 
 func (data *GetParagraphRequest) CreateRequestData() (RequestData, error) {
     var result RequestData

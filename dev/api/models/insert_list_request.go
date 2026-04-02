@@ -56,6 +56,9 @@ type InsertListRequest struct {
     Optionals map[string]interface{}
 }
 
+func (data *InsertListRequest) GetOriginalRequest() RequestInterface {
+    return data
+}
 
 func (data *InsertListRequest) CreateRequestData() (RequestData, error) {
     var result RequestData

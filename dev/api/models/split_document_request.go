@@ -58,6 +58,9 @@ type SplitDocumentRequest struct {
     Optionals map[string]interface{}
 }
 
+func (data *SplitDocumentRequest) GetOriginalRequest() RequestInterface {
+    return data
+}
 
 func (data *SplitDocumentRequest) CreateRequestData() (RequestData, error) {
     var result RequestData

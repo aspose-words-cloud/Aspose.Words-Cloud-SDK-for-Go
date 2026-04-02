@@ -208,6 +208,61 @@ func (a *WordsApiService) AppendDocument(ctx context.Context, data *models.Appen
 /* WordsApiService Appends documents to the original document.
  * @param ctx context.Context for authentication, logging, tracing, etc.
  * @data operation request data.
+@return JobHandler*/
+func (a *WordsApiService) AppendDocumentJob(ctx context.Context, data *models.AppendDocumentJobRequest) (*JobHandler, *http.Response, error) {
+    var (
+        successPayload *JobHandler
+    )
+
+    requestData, err := data.CreateRequestData();
+    if err != nil {
+        return successPayload, nil, err
+    }
+
+    requestData.Path = a.client.cfg.BaseUrl + requestData.Path;
+
+    r, err := a.client.prepareRequest(ctx, requestData)
+    if err != nil {
+        return successPayload, nil, err
+    }
+
+    response, err := a.client.callAPI(r)
+
+    if err != nil || response == nil {
+        return successPayload, nil, err
+    }
+
+    defer response.Body.Close()
+
+    if response.StatusCode == 401 {
+        return successPayload, nil, errors.New("Access is denied")
+    }
+    if response.StatusCode >= 300 {
+        var apiError models.WordsApiErrorResponse;
+        var jsonMap map[string]interface{}
+        if err = json.NewDecoder(response.Body).Decode(&jsonMap); err != nil {
+            return successPayload, nil, err
+        }
+
+        apiError.Deserialize(jsonMap)
+        return successPayload, response, &apiError
+    }
+    defer response.Body.Close()
+
+    var jsonMap map[string]interface{}
+    if err = json.NewDecoder(response.Body).Decode(&jsonMap); err != nil {
+        return successPayload, response, err
+    }
+
+    info := new(models.JobInfo)
+    info.Deserialize(jsonMap)
+    successPayload = NewJobHandler(a, ctx, data.GetOriginalRequest(), info)
+    return successPayload, response, err
+}
+
+/* WordsApiService Appends documents to the original document.
+ * @param ctx context.Context for authentication, logging, tracing, etc.
+ * @data operation request data.
 @return AppendDocumentOnlineResponse*/
 func (a *WordsApiService) AppendDocumentOnline(ctx context.Context, data *models.AppendDocumentOnlineRequest) (models.AppendDocumentOnlineResponse, *http.Response, error) {
     var (
@@ -254,6 +309,61 @@ func (a *WordsApiService) AppendDocumentOnline(ctx context.Context, data *models
     }
 
     return result.(models.AppendDocumentOnlineResponse), response, err
+}
+
+/* WordsApiService Appends documents to the original document.
+ * @param ctx context.Context for authentication, logging, tracing, etc.
+ * @data operation request data.
+@return JobHandler*/
+func (a *WordsApiService) AppendDocumentOnlineJob(ctx context.Context, data *models.AppendDocumentOnlineJobRequest) (*JobHandler, *http.Response, error) {
+    var (
+        successPayload *JobHandler
+    )
+
+    requestData, err := data.CreateRequestData();
+    if err != nil {
+        return successPayload, nil, err
+    }
+
+    requestData.Path = a.client.cfg.BaseUrl + requestData.Path;
+
+    r, err := a.client.prepareRequest(ctx, requestData)
+    if err != nil {
+        return successPayload, nil, err
+    }
+
+    response, err := a.client.callAPI(r)
+
+    if err != nil || response == nil {
+        return successPayload, nil, err
+    }
+
+    defer response.Body.Close()
+
+    if response.StatusCode == 401 {
+        return successPayload, nil, errors.New("Access is denied")
+    }
+    if response.StatusCode >= 300 {
+        var apiError models.WordsApiErrorResponse;
+        var jsonMap map[string]interface{}
+        if err = json.NewDecoder(response.Body).Decode(&jsonMap); err != nil {
+            return successPayload, nil, err
+        }
+
+        apiError.Deserialize(jsonMap)
+        return successPayload, response, &apiError
+    }
+    defer response.Body.Close()
+
+    var jsonMap map[string]interface{}
+    if err = json.NewDecoder(response.Body).Decode(&jsonMap); err != nil {
+        return successPayload, response, err
+    }
+
+    info := new(models.JobInfo)
+    info.Deserialize(jsonMap)
+    successPayload = NewJobHandler(a, ctx, data.GetOriginalRequest(), info)
+    return successPayload, response, err
 }
 
 /* WordsApiService Applies a style to the document node.
@@ -697,6 +807,61 @@ func (a *WordsApiService) ConvertDocument(ctx context.Context, data *models.Conv
         return response, &apiError
     }
     return response, err
+}
+
+/* WordsApiService Converts a document on a local drive to the specified format.
+ * @param ctx context.Context for authentication, logging, tracing, etc.
+ * @data operation request data.
+@return JobHandler*/
+func (a *WordsApiService) ConvertDocumentJob(ctx context.Context, data *models.ConvertDocumentJobRequest) (*JobHandler, *http.Response, error) {
+    var (
+        successPayload *JobHandler
+    )
+
+    requestData, err := data.CreateRequestData();
+    if err != nil {
+        return successPayload, nil, err
+    }
+
+    requestData.Path = a.client.cfg.BaseUrl + requestData.Path;
+
+    r, err := a.client.prepareRequest(ctx, requestData)
+    if err != nil {
+        return successPayload, nil, err
+    }
+
+    response, err := a.client.callAPI(r)
+
+    if err != nil || response == nil {
+        return successPayload, nil, err
+    }
+
+    defer response.Body.Close()
+
+    if response.StatusCode == 401 {
+        return successPayload, nil, errors.New("Access is denied")
+    }
+    if response.StatusCode >= 300 {
+        var apiError models.WordsApiErrorResponse;
+        var jsonMap map[string]interface{}
+        if err = json.NewDecoder(response.Body).Decode(&jsonMap); err != nil {
+            return successPayload, nil, err
+        }
+
+        apiError.Deserialize(jsonMap)
+        return successPayload, response, &apiError
+    }
+    defer response.Body.Close()
+
+    var jsonMap map[string]interface{}
+    if err = json.NewDecoder(response.Body).Decode(&jsonMap); err != nil {
+        return successPayload, response, err
+    }
+
+    info := new(models.JobInfo)
+    info.Deserialize(jsonMap)
+    successPayload = NewJobHandler(a, ctx, data.GetOriginalRequest(), info)
+    return successPayload, response, err
 }
 
 /* WordsApiService Copy file.
@@ -4134,6 +4299,61 @@ func (a *WordsApiService) ExecuteMailMerge(ctx context.Context, data *models.Exe
     return successPayload, response, err
 }
 
+/* WordsApiService Executes a Mail Merge operation.
+ * @param ctx context.Context for authentication, logging, tracing, etc.
+ * @data operation request data.
+@return JobHandler*/
+func (a *WordsApiService) ExecuteMailMergeJob(ctx context.Context, data *models.ExecuteMailMergeJobRequest) (*JobHandler, *http.Response, error) {
+    var (
+        successPayload *JobHandler
+    )
+
+    requestData, err := data.CreateRequestData();
+    if err != nil {
+        return successPayload, nil, err
+    }
+
+    requestData.Path = a.client.cfg.BaseUrl + requestData.Path;
+
+    r, err := a.client.prepareRequest(ctx, requestData)
+    if err != nil {
+        return successPayload, nil, err
+    }
+
+    response, err := a.client.callAPI(r)
+
+    if err != nil || response == nil {
+        return successPayload, nil, err
+    }
+
+    defer response.Body.Close()
+
+    if response.StatusCode == 401 {
+        return successPayload, nil, errors.New("Access is denied")
+    }
+    if response.StatusCode >= 300 {
+        var apiError models.WordsApiErrorResponse;
+        var jsonMap map[string]interface{}
+        if err = json.NewDecoder(response.Body).Decode(&jsonMap); err != nil {
+            return successPayload, nil, err
+        }
+
+        apiError.Deserialize(jsonMap)
+        return successPayload, response, &apiError
+    }
+    defer response.Body.Close()
+
+    var jsonMap map[string]interface{}
+    if err = json.NewDecoder(response.Body).Decode(&jsonMap); err != nil {
+        return successPayload, response, err
+    }
+
+    info := new(models.JobInfo)
+    info.Deserialize(jsonMap)
+    successPayload = NewJobHandler(a, ctx, data.GetOriginalRequest(), info)
+    return successPayload, response, err
+}
+
 /* WordsApiService Executes a Mail Merge operation online.
  * @param ctx context.Context for authentication, logging, tracing, etc.
  * @data operation request data.
@@ -4175,6 +4395,61 @@ func (a *WordsApiService) ExecuteMailMergeOnline(ctx context.Context, data *mode
         return response, &apiError
     }
     return response, err
+}
+
+/* WordsApiService Executes a Mail Merge operation online.
+ * @param ctx context.Context for authentication, logging, tracing, etc.
+ * @data operation request data.
+@return JobHandler*/
+func (a *WordsApiService) ExecuteMailMergeOnlineJob(ctx context.Context, data *models.ExecuteMailMergeOnlineJobRequest) (*JobHandler, *http.Response, error) {
+    var (
+        successPayload *JobHandler
+    )
+
+    requestData, err := data.CreateRequestData();
+    if err != nil {
+        return successPayload, nil, err
+    }
+
+    requestData.Path = a.client.cfg.BaseUrl + requestData.Path;
+
+    r, err := a.client.prepareRequest(ctx, requestData)
+    if err != nil {
+        return successPayload, nil, err
+    }
+
+    response, err := a.client.callAPI(r)
+
+    if err != nil || response == nil {
+        return successPayload, nil, err
+    }
+
+    defer response.Body.Close()
+
+    if response.StatusCode == 401 {
+        return successPayload, nil, errors.New("Access is denied")
+    }
+    if response.StatusCode >= 300 {
+        var apiError models.WordsApiErrorResponse;
+        var jsonMap map[string]interface{}
+        if err = json.NewDecoder(response.Body).Decode(&jsonMap); err != nil {
+            return successPayload, nil, err
+        }
+
+        apiError.Deserialize(jsonMap)
+        return successPayload, response, &apiError
+    }
+    defer response.Body.Close()
+
+    var jsonMap map[string]interface{}
+    if err = json.NewDecoder(response.Body).Decode(&jsonMap); err != nil {
+        return successPayload, response, err
+    }
+
+    info := new(models.JobInfo)
+    info.Deserialize(jsonMap)
+    successPayload = NewJobHandler(a, ctx, data.GetOriginalRequest(), info)
+    return successPayload, response, err
 }
 
 /* WordsApiService Get all information about revisions.
@@ -14663,6 +14938,61 @@ func (a *WordsApiService) SplitDocument(ctx context.Context, data *models.SplitD
 /* WordsApiService Splits a document into parts and saves them in the specified format.
  * @param ctx context.Context for authentication, logging, tracing, etc.
  * @data operation request data.
+@return JobHandler*/
+func (a *WordsApiService) SplitDocumentJob(ctx context.Context, data *models.SplitDocumentJobRequest) (*JobHandler, *http.Response, error) {
+    var (
+        successPayload *JobHandler
+    )
+
+    requestData, err := data.CreateRequestData();
+    if err != nil {
+        return successPayload, nil, err
+    }
+
+    requestData.Path = a.client.cfg.BaseUrl + requestData.Path;
+
+    r, err := a.client.prepareRequest(ctx, requestData)
+    if err != nil {
+        return successPayload, nil, err
+    }
+
+    response, err := a.client.callAPI(r)
+
+    if err != nil || response == nil {
+        return successPayload, nil, err
+    }
+
+    defer response.Body.Close()
+
+    if response.StatusCode == 401 {
+        return successPayload, nil, errors.New("Access is denied")
+    }
+    if response.StatusCode >= 300 {
+        var apiError models.WordsApiErrorResponse;
+        var jsonMap map[string]interface{}
+        if err = json.NewDecoder(response.Body).Decode(&jsonMap); err != nil {
+            return successPayload, nil, err
+        }
+
+        apiError.Deserialize(jsonMap)
+        return successPayload, response, &apiError
+    }
+    defer response.Body.Close()
+
+    var jsonMap map[string]interface{}
+    if err = json.NewDecoder(response.Body).Decode(&jsonMap); err != nil {
+        return successPayload, response, err
+    }
+
+    info := new(models.JobInfo)
+    info.Deserialize(jsonMap)
+    successPayload = NewJobHandler(a, ctx, data.GetOriginalRequest(), info)
+    return successPayload, response, err
+}
+
+/* WordsApiService Splits a document into parts and saves them in the specified format.
+ * @param ctx context.Context for authentication, logging, tracing, etc.
+ * @data operation request data.
 @return SplitDocumentOnlineResponse*/
 func (a *WordsApiService) SplitDocumentOnline(ctx context.Context, data *models.SplitDocumentOnlineRequest) (models.SplitDocumentOnlineResponse, *http.Response, error) {
     var (
@@ -14709,6 +15039,61 @@ func (a *WordsApiService) SplitDocumentOnline(ctx context.Context, data *models.
     }
 
     return result.(models.SplitDocumentOnlineResponse), response, err
+}
+
+/* WordsApiService Splits a document into parts and saves them in the specified format.
+ * @param ctx context.Context for authentication, logging, tracing, etc.
+ * @data operation request data.
+@return JobHandler*/
+func (a *WordsApiService) SplitDocumentOnlineJob(ctx context.Context, data *models.SplitDocumentOnlineJobRequest) (*JobHandler, *http.Response, error) {
+    var (
+        successPayload *JobHandler
+    )
+
+    requestData, err := data.CreateRequestData();
+    if err != nil {
+        return successPayload, nil, err
+    }
+
+    requestData.Path = a.client.cfg.BaseUrl + requestData.Path;
+
+    r, err := a.client.prepareRequest(ctx, requestData)
+    if err != nil {
+        return successPayload, nil, err
+    }
+
+    response, err := a.client.callAPI(r)
+
+    if err != nil || response == nil {
+        return successPayload, nil, err
+    }
+
+    defer response.Body.Close()
+
+    if response.StatusCode == 401 {
+        return successPayload, nil, errors.New("Access is denied")
+    }
+    if response.StatusCode >= 300 {
+        var apiError models.WordsApiErrorResponse;
+        var jsonMap map[string]interface{}
+        if err = json.NewDecoder(response.Body).Decode(&jsonMap); err != nil {
+            return successPayload, nil, err
+        }
+
+        apiError.Deserialize(jsonMap)
+        return successPayload, response, &apiError
+    }
+    defer response.Body.Close()
+
+    var jsonMap map[string]interface{}
+    if err = json.NewDecoder(response.Body).Decode(&jsonMap); err != nil {
+        return successPayload, response, err
+    }
+
+    info := new(models.JobInfo)
+    info.Deserialize(jsonMap)
+    successPayload = NewJobHandler(a, ctx, data.GetOriginalRequest(), info)
+    return successPayload, response, err
 }
 
 /* WordsApiService Translate a node id to a node path.

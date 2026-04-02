@@ -51,6 +51,9 @@ type GetDocumentRequest struct {
     Optionals map[string]interface{}
 }
 
+func (data *GetDocumentRequest) GetOriginalRequest() RequestInterface {
+    return data
+}
 
 func (data *GetDocumentRequest) CreateRequestData() (RequestData, error) {
     var result RequestData

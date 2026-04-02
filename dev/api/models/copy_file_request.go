@@ -49,6 +49,9 @@ type CopyFileRequest struct {
     Optionals map[string]interface{}
 }
 
+func (data *CopyFileRequest) GetOriginalRequest() RequestInterface {
+    return data
+}
 
 func (data *CopyFileRequest) CreateRequestData() (RequestData, error) {
     var result RequestData

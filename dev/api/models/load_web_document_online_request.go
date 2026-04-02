@@ -43,6 +43,9 @@ type LoadWebDocumentOnlineRequest struct {
         Data ILoadWebDocumentData
 }
 
+func (data *LoadWebDocumentOnlineRequest) GetOriginalRequest() RequestInterface {
+    return data
+}
 
 func (data *LoadWebDocumentOnlineRequest) CreateRequestData() (RequestData, error) {
     var result RequestData

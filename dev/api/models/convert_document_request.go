@@ -53,6 +53,9 @@ type ConvertDocumentRequest struct {
     Optionals map[string]interface{}
 }
 
+func (data *ConvertDocumentRequest) GetOriginalRequest() RequestInterface {
+    return data
+}
 
 func (data *ConvertDocumentRequest) CreateRequestData() (RequestData, error) {
     var result RequestData

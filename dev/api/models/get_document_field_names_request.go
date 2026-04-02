@@ -52,6 +52,9 @@ type GetDocumentFieldNamesRequest struct {
     Optionals map[string]interface{}
 }
 
+func (data *GetDocumentFieldNamesRequest) GetOriginalRequest() RequestInterface {
+    return data
+}
 
 func (data *GetDocumentFieldNamesRequest) CreateRequestData() (RequestData, error) {
     var result RequestData

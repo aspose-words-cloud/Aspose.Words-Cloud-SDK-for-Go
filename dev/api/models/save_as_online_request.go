@@ -52,6 +52,9 @@ type SaveAsOnlineRequest struct {
     Optionals map[string]interface{}
 }
 
+func (data *SaveAsOnlineRequest) GetOriginalRequest() RequestInterface {
+    return data
+}
 
 func (data *SaveAsOnlineRequest) CreateRequestData() (RequestData, error) {
     var result RequestData

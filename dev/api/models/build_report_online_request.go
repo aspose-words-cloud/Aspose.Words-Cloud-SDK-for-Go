@@ -48,6 +48,9 @@ type BuildReportOnlineRequest struct {
     Optionals map[string]interface{}
 }
 
+func (data *BuildReportOnlineRequest) GetOriginalRequest() RequestInterface {
+    return data
+}
 
 func (data *BuildReportOnlineRequest) CreateRequestData() (RequestData, error) {
     var result RequestData

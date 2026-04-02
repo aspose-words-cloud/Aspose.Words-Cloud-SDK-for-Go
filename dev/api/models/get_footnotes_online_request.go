@@ -50,6 +50,9 @@ type GetFootnotesOnlineRequest struct {
     Optionals map[string]interface{}
 }
 
+func (data *GetFootnotesOnlineRequest) GetOriginalRequest() RequestInterface {
+    return data
+}
 
 func (data *GetFootnotesOnlineRequest) CreateRequestData() (RequestData, error) {
     var result RequestData

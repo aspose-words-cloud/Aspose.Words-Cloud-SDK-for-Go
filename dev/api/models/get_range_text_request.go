@@ -54,6 +54,9 @@ type GetRangeTextRequest struct {
     Optionals map[string]interface{}
 }
 
+func (data *GetRangeTextRequest) GetOriginalRequest() RequestInterface {
+    return data
+}
 
 func (data *GetRangeTextRequest) CreateRequestData() (RequestData, error) {
     var result RequestData

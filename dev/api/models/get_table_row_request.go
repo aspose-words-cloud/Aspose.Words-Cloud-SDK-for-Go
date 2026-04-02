@@ -55,6 +55,9 @@ type GetTableRowRequest struct {
     Optionals map[string]interface{}
 }
 
+func (data *GetTableRowRequest) GetOriginalRequest() RequestInterface {
+    return data
+}
 
 func (data *GetTableRowRequest) CreateRequestData() (RequestData, error) {
     var result RequestData

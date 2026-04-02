@@ -58,6 +58,9 @@ type UpdateStructuredDocumentTagOnlineRequest struct {
     Optionals map[string]interface{}
 }
 
+func (data *UpdateStructuredDocumentTagOnlineRequest) GetOriginalRequest() RequestInterface {
+    return data
+}
 
 func (data *UpdateStructuredDocumentTagOnlineRequest) CreateRequestData() (RequestData, error) {
     var result RequestData

@@ -55,6 +55,9 @@ type DeleteDocumentPropertyRequest struct {
     Optionals map[string]interface{}
 }
 
+func (data *DeleteDocumentPropertyRequest) GetOriginalRequest() RequestInterface {
+    return data
+}
 
 func (data *DeleteDocumentPropertyRequest) CreateRequestData() (RequestData, error) {
     var result RequestData

@@ -53,6 +53,9 @@ type CompareDocumentOnlineRequest struct {
     Optionals map[string]interface{}
 }
 
+func (data *CompareDocumentOnlineRequest) GetOriginalRequest() RequestInterface {
+    return data
+}
 
 func (data *CompareDocumentOnlineRequest) CreateRequestData() (RequestData, error) {
     var result RequestData

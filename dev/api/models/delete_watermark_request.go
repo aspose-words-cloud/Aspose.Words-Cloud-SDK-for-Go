@@ -54,6 +54,9 @@ type DeleteWatermarkRequest struct {
     Optionals map[string]interface{}
 }
 
+func (data *DeleteWatermarkRequest) GetOriginalRequest() RequestInterface {
+    return data
+}
 
 func (data *DeleteWatermarkRequest) CreateRequestData() (RequestData, error) {
     var result RequestData

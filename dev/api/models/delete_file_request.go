@@ -46,6 +46,9 @@ type DeleteFileRequest struct {
     Optionals map[string]interface{}
 }
 
+func (data *DeleteFileRequest) GetOriginalRequest() RequestInterface {
+    return data
+}
 
 func (data *DeleteFileRequest) CreateRequestData() (RequestData, error) {
     var result RequestData

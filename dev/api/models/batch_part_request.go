@@ -73,6 +73,11 @@ func (c *BatchPartRequest) CreateResponse(reader io.Reader, boundary string) (re
 	return c.Request.CreateResponse(reader, boundary)
 }
 
+// get original request.
+func (c *BatchPartRequest) GetOriginalRequest() RequestInterface {
+    return c.Request.GetOriginalRequest()
+}
+
 func createRandomGuid() *string {
 	b := make([]byte, 16)
 	rand.Read(b)

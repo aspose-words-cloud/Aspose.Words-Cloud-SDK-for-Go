@@ -46,6 +46,9 @@ type DownloadFileRequest struct {
     Optionals map[string]interface{}
 }
 
+func (data *DownloadFileRequest) GetOriginalRequest() RequestInterface {
+    return data
+}
 
 func (data *DownloadFileRequest) CreateRequestData() (RequestData, error) {
     var result RequestData

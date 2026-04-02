@@ -57,6 +57,9 @@ type DeleteRunRequest struct {
     Optionals map[string]interface{}
 }
 
+func (data *DeleteRunRequest) GetOriginalRequest() RequestInterface {
+    return data
+}
 
 func (data *DeleteRunRequest) CreateRequestData() (RequestData, error) {
     var result RequestData

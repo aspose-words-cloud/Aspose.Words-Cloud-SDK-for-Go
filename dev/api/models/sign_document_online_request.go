@@ -54,6 +54,9 @@ type SignDocumentOnlineRequest struct {
     Optionals map[string]interface{}
 }
 
+func (data *SignDocumentOnlineRequest) GetOriginalRequest() RequestInterface {
+    return data
+}
 
 func (data *SignDocumentOnlineRequest) CreateRequestData() (RequestData, error) {
     var result RequestData

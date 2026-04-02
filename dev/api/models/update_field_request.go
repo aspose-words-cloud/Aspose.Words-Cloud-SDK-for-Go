@@ -59,6 +59,9 @@ type UpdateFieldRequest struct {
     Optionals map[string]interface{}
 }
 
+func (data *UpdateFieldRequest) GetOriginalRequest() RequestInterface {
+    return data
+}
 
 func (data *UpdateFieldRequest) CreateRequestData() (RequestData, error) {
     var result RequestData

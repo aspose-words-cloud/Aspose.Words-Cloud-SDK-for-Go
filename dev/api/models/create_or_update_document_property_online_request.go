@@ -57,6 +57,9 @@ type CreateOrUpdateDocumentPropertyOnlineRequest struct {
     Optionals map[string]interface{}
 }
 
+func (data *CreateOrUpdateDocumentPropertyOnlineRequest) GetOriginalRequest() RequestInterface {
+    return data
+}
 
 func (data *CreateOrUpdateDocumentPropertyOnlineRequest) CreateRequestData() (RequestData, error) {
     var result RequestData

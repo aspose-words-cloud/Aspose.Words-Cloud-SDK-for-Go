@@ -53,6 +53,9 @@ type GetTableCellOnlineRequest struct {
     Optionals map[string]interface{}
 }
 
+func (data *GetTableCellOnlineRequest) GetOriginalRequest() RequestInterface {
+    return data
+}
 
 func (data *GetTableCellOnlineRequest) CreateRequestData() (RequestData, error) {
     var result RequestData

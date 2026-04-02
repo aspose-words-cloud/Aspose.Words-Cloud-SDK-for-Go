@@ -52,6 +52,9 @@ type RemoveAllSignaturesRequest struct {
     Optionals map[string]interface{}
 }
 
+func (data *RemoveAllSignaturesRequest) GetOriginalRequest() RequestInterface {
+    return data
+}
 
 func (data *RemoveAllSignaturesRequest) CreateRequestData() (RequestData, error) {
     var result RequestData

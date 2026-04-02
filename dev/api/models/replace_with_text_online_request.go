@@ -56,6 +56,9 @@ type ReplaceWithTextOnlineRequest struct {
     Optionals map[string]interface{}
 }
 
+func (data *ReplaceWithTextOnlineRequest) GetOriginalRequest() RequestInterface {
+    return data
+}
 
 func (data *ReplaceWithTextOnlineRequest) CreateRequestData() (RequestData, error) {
     var result RequestData

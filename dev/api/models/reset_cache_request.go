@@ -39,6 +39,9 @@ import (
 type ResetCacheRequest struct {
 }
 
+func (data *ResetCacheRequest) GetOriginalRequest() RequestInterface {
+    return data
+}
 
 func (data *ResetCacheRequest) CreateRequestData() (RequestData, error) {
     var result RequestData

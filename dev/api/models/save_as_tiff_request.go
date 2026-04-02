@@ -71,6 +71,9 @@ type SaveAsTiffRequest struct {
     Optionals map[string]interface{}
 }
 
+func (data *SaveAsTiffRequest) GetOriginalRequest() RequestInterface {
+    return data
+}
 
 func (data *SaveAsTiffRequest) CreateRequestData() (RequestData, error) {
     var result RequestData

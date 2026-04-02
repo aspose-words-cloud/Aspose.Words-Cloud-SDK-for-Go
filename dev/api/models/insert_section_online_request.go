@@ -53,6 +53,9 @@ type InsertSectionOnlineRequest struct {
     Optionals map[string]interface{}
 }
 
+func (data *InsertSectionOnlineRequest) GetOriginalRequest() RequestInterface {
+    return data
+}
 
 func (data *InsertSectionOnlineRequest) CreateRequestData() (RequestData, error) {
     var result RequestData

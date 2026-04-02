@@ -57,6 +57,9 @@ type InsertTableRequest struct {
     Optionals map[string]interface{}
 }
 
+func (data *InsertTableRequest) GetOriginalRequest() RequestInterface {
+    return data
+}
 
 func (data *InsertTableRequest) CreateRequestData() (RequestData, error) {
     var result RequestData

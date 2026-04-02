@@ -50,6 +50,9 @@ type GetStructuredDocumentTagsOnlineRequest struct {
     Optionals map[string]interface{}
 }
 
+func (data *GetStructuredDocumentTagsOnlineRequest) GetOriginalRequest() RequestInterface {
+    return data
+}
 
 func (data *GetStructuredDocumentTagsOnlineRequest) CreateRequestData() (RequestData, error) {
     var result RequestData

@@ -58,6 +58,9 @@ type UpdateStyleRequest struct {
     Optionals map[string]interface{}
 }
 
+func (data *UpdateStyleRequest) GetOriginalRequest() RequestInterface {
+    return data
+}
 
 func (data *UpdateStyleRequest) CreateRequestData() (RequestData, error) {
     var result RequestData

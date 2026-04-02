@@ -58,6 +58,9 @@ type UpdateParagraphFormatOnlineRequest struct {
     Optionals map[string]interface{}
 }
 
+func (data *UpdateParagraphFormatOnlineRequest) GetOriginalRequest() RequestInterface {
+    return data
+}
 
 func (data *UpdateParagraphFormatOnlineRequest) CreateRequestData() (RequestData, error) {
     var result RequestData

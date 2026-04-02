@@ -57,6 +57,9 @@ type InsertOrUpdateParagraphTabStopRequest struct {
     Optionals map[string]interface{}
 }
 
+func (data *InsertOrUpdateParagraphTabStopRequest) GetOriginalRequest() RequestInterface {
+    return data
+}
 
 func (data *InsertOrUpdateParagraphTabStopRequest) CreateRequestData() (RequestData, error) {
     var result RequestData

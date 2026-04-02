@@ -57,6 +57,9 @@ type UpdateSectionPageSetupOnlineRequest struct {
     Optionals map[string]interface{}
 }
 
+func (data *UpdateSectionPageSetupOnlineRequest) GetOriginalRequest() RequestInterface {
+    return data
+}
 
 func (data *UpdateSectionPageSetupOnlineRequest) CreateRequestData() (RequestData, error) {
     var result RequestData

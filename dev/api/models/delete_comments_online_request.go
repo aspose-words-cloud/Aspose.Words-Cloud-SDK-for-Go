@@ -50,6 +50,9 @@ type DeleteCommentsOnlineRequest struct {
     Optionals map[string]interface{}
 }
 
+func (data *DeleteCommentsOnlineRequest) GetOriginalRequest() RequestInterface {
+    return data
+}
 
 func (data *DeleteCommentsOnlineRequest) CreateRequestData() (RequestData, error) {
     var result RequestData

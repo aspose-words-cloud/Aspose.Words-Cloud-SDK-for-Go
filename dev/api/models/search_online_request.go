@@ -50,6 +50,9 @@ type SearchOnlineRequest struct {
     Optionals map[string]interface{}
 }
 
+func (data *SearchOnlineRequest) GetOriginalRequest() RequestInterface {
+    return data
+}
 
 func (data *SearchOnlineRequest) CreateRequestData() (RequestData, error) {
     var result RequestData

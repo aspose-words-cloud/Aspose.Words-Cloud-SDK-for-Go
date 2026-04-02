@@ -56,6 +56,9 @@ type LinkHeaderFootersToPreviousRequest struct {
     Optionals map[string]interface{}
 }
 
+func (data *LinkHeaderFootersToPreviousRequest) GetOriginalRequest() RequestInterface {
+    return data
+}
 
 func (data *LinkHeaderFootersToPreviousRequest) CreateRequestData() (RequestData, error) {
     var result RequestData

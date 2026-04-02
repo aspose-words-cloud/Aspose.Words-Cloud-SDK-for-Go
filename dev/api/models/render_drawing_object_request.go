@@ -57,6 +57,9 @@ type RenderDrawingObjectRequest struct {
     Optionals map[string]interface{}
 }
 
+func (data *RenderDrawingObjectRequest) GetOriginalRequest() RequestInterface {
+    return data
+}
 
 func (data *RenderDrawingObjectRequest) CreateRequestData() (RequestData, error) {
     var result RequestData

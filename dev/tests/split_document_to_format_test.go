@@ -68,6 +68,48 @@ func Test_SplitDocumentToFormat_SplitDocument(t *testing.T) {
     assert.Equal(t, 2, len(actual.GetSplitResult().GetPages()), "Validate SplitDocument response.");
 }
 
+// Test for document splitting job.
+func Test_SplitDocumentToFormat_SplitDocumentJob(t *testing.T) {
+    config := ReadConfiguration(t)
+    client, ctx := PrepareTest(t, config)
+    remoteDataFolder := remoteBaseTestDataFolder + "/DocumentActions/SplitDocument"
+    localFile := "Common/test_multi_pages.docx"
+    remoteFileName := "TestSplitDocument.docx"
+
+    UploadNextFileToStorage(t, ctx, client, GetLocalFile(localFile), remoteDataFolder + "/" + remoteFileName)
+
+
+    options := map[string]interface{}{
+        "folder": remoteDataFolder,
+        "destFileName": baseTestOutPath + "/TestSplitDocument.text",
+        "from": int32(1),
+        "to": int32(2),
+    }
+
+    request := &models.SplitDocumentJobRequest{
+        Name: ToStringPointer(remoteFileName),
+        Format: ToStringPointer("text"),
+        Optionals: options,
+    }
+
+    var actual models.SplitDocumentResponse
+    jobHandler, _, err := client.WordsApi.SplitDocumentJob(ctx, request)
+    if err == nil {
+        actualRaw, err := jobHandler.WaitResult()
+        if err != nil {
+            t.Error(err)
+        }
+        actual = actualRaw.(models.SplitDocumentResponse)
+    }
+    if err != nil {
+        t.Error(err)
+    }
+
+    assert.NotNil(t, actual.GetSplitResult(), "Validate SplitDocumentJob response.");
+    assert.NotNil(t, actual.GetSplitResult().GetPages(), "Validate SplitDocumentJob response.");
+    assert.Equal(t, 2, len(actual.GetSplitResult().GetPages()), "Validate SplitDocumentJob response.");
+}
+
 // Test for document splitting online.
 func Test_SplitDocumentToFormat_SplitDocumentOnline(t *testing.T) {
     config := ReadConfiguration(t)
@@ -89,6 +131,39 @@ func Test_SplitDocumentToFormat_SplitDocumentOnline(t *testing.T) {
     }
 
     _, _, err := client.WordsApi.SplitDocumentOnline(ctx, request)
+    if err != nil {
+        t.Error(err)
+    }
+
+}
+
+// Test for document splitting online job.
+func Test_SplitDocumentToFormat_SplitDocumentOnlineJob(t *testing.T) {
+    config := ReadConfiguration(t)
+    client, ctx := PrepareTest(t, config)
+    localFile := "Common/test_multi_pages.docx"
+
+    requestDocument := OpenFile(t, localFile)
+
+    options := map[string]interface{}{
+        "destFileName": baseTestOutPath + "/TestSplitDocument.text",
+        "from": int32(1),
+        "to": int32(2),
+    }
+
+    request := &models.SplitDocumentOnlineJobRequest{
+        Document: requestDocument,
+        Format: ToStringPointer("text"),
+        Optionals: options,
+    }
+
+    jobHandler, _, err := client.WordsApi.SplitDocumentOnlineJob(ctx, request)
+    if err == nil {
+        _, err := jobHandler.WaitResult()
+        if err != nil {
+            t.Error(err)
+        }
+    }
     if err != nil {
         t.Error(err)
     }

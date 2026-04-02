@@ -51,6 +51,9 @@ type GetSignaturesRequest struct {
     Optionals map[string]interface{}
 }
 
+func (data *GetSignaturesRequest) GetOriginalRequest() RequestInterface {
+    return data
+}
 
 func (data *GetSignaturesRequest) CreateRequestData() (RequestData, error) {
     var result RequestData

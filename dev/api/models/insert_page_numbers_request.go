@@ -56,6 +56,9 @@ type InsertPageNumbersRequest struct {
     Optionals map[string]interface{}
 }
 
+func (data *InsertPageNumbersRequest) GetOriginalRequest() RequestInterface {
+    return data
+}
 
 func (data *InsertPageNumbersRequest) CreateRequestData() (RequestData, error) {
     var result RequestData

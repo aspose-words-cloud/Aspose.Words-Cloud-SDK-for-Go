@@ -56,6 +56,9 @@ type SplitDocumentOnlineRequest struct {
     Optionals map[string]interface{}
 }
 
+func (data *SplitDocumentOnlineRequest) GetOriginalRequest() RequestInterface {
+    return data
+}
 
 func (data *SplitDocumentOnlineRequest) CreateRequestData() (RequestData, error) {
     var result RequestData

@@ -43,6 +43,9 @@ type GetAvailableFontsRequest struct {
     Optionals map[string]interface{}
 }
 
+func (data *GetAvailableFontsRequest) GetOriginalRequest() RequestInterface {
+    return data
+}
 
 func (data *GetAvailableFontsRequest) CreateRequestData() (RequestData, error) {
     var result RequestData

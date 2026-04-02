@@ -58,6 +58,9 @@ type UpdateListRequest struct {
     Optionals map[string]interface{}
 }
 
+func (data *UpdateListRequest) GetOriginalRequest() RequestInterface {
+    return data
+}
 
 func (data *UpdateListRequest) CreateRequestData() (RequestData, error) {
     var result RequestData

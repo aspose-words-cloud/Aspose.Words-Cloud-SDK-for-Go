@@ -56,6 +56,9 @@ type DeleteBorderOnlineRequest struct {
     Optionals map[string]interface{}
 }
 
+func (data *DeleteBorderOnlineRequest) GetOriginalRequest() RequestInterface {
+    return data
+}
 
 func (data *DeleteBorderOnlineRequest) CreateRequestData() (RequestData, error) {
     var result RequestData

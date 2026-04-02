@@ -55,6 +55,9 @@ type DeleteCommentRequest struct {
     Optionals map[string]interface{}
 }
 
+func (data *DeleteCommentRequest) GetOriginalRequest() RequestInterface {
+    return data
+}
 
 func (data *DeleteCommentRequest) CreateRequestData() (RequestData, error) {
     var result RequestData

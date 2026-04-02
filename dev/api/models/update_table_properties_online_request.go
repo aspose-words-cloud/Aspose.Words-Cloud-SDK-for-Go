@@ -58,6 +58,9 @@ type UpdateTablePropertiesOnlineRequest struct {
     Optionals map[string]interface{}
 }
 
+func (data *UpdateTablePropertiesOnlineRequest) GetOriginalRequest() RequestInterface {
+    return data
+}
 
 func (data *UpdateTablePropertiesOnlineRequest) CreateRequestData() (RequestData, error) {
     var result RequestData

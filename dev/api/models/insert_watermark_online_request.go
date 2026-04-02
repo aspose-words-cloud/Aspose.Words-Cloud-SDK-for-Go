@@ -54,6 +54,9 @@ type InsertWatermarkOnlineRequest struct {
     Optionals map[string]interface{}
 }
 
+func (data *InsertWatermarkOnlineRequest) GetOriginalRequest() RequestInterface {
+    return data
+}
 
 func (data *InsertWatermarkOnlineRequest) CreateRequestData() (RequestData, error) {
     var result RequestData

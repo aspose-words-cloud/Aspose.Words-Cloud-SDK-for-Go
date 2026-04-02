@@ -56,6 +56,9 @@ type InsertCustomXmlPartRequest struct {
     Optionals map[string]interface{}
 }
 
+func (data *InsertCustomXmlPartRequest) GetOriginalRequest() RequestInterface {
+    return data
+}
 
 func (data *InsertCustomXmlPartRequest) CreateRequestData() (RequestData, error) {
     var result RequestData

@@ -53,6 +53,9 @@ type GetSectionPageSetupRequest struct {
     Optionals map[string]interface{}
 }
 
+func (data *GetSectionPageSetupRequest) GetOriginalRequest() RequestInterface {
+    return data
+}
 
 func (data *GetSectionPageSetupRequest) CreateRequestData() (RequestData, error) {
     var result RequestData

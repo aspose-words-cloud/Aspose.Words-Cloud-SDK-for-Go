@@ -58,6 +58,9 @@ type InsertHeaderFooterRequest struct {
     Optionals map[string]interface{}
 }
 
+func (data *InsertHeaderFooterRequest) GetOriginalRequest() RequestInterface {
+    return data
+}
 
 func (data *InsertHeaderFooterRequest) CreateRequestData() (RequestData, error) {
     var result RequestData

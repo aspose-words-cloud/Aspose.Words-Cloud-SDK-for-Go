@@ -52,6 +52,9 @@ type GetParagraphTabStopsOnlineRequest struct {
     Optionals map[string]interface{}
 }
 
+func (data *GetParagraphTabStopsOnlineRequest) GetOriginalRequest() RequestInterface {
+    return data
+}
 
 func (data *GetParagraphTabStopsOnlineRequest) CreateRequestData() (RequestData, error) {
     var result RequestData

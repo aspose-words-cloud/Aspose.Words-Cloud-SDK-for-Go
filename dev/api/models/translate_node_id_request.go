@@ -53,6 +53,9 @@ type TranslateNodeIdRequest struct {
     Optionals map[string]interface{}
 }
 
+func (data *TranslateNodeIdRequest) GetOriginalRequest() RequestInterface {
+    return data
+}
 
 func (data *TranslateNodeIdRequest) CreateRequestData() (RequestData, error) {
     var result RequestData

@@ -40,6 +40,9 @@ import (
 type GetInfoRequest struct {
 }
 
+func (data *GetInfoRequest) GetOriginalRequest() RequestInterface {
+    return data
+}
 
 func (data *GetInfoRequest) CreateRequestData() (RequestData, error) {
     var result RequestData

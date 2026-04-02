@@ -55,6 +55,9 @@ type RenderPageRequest struct {
     Optionals map[string]interface{}
 }
 
+func (data *RenderPageRequest) GetOriginalRequest() RequestInterface {
+    return data
+}
 
 func (data *RenderPageRequest) CreateRequestData() (RequestData, error) {
     var result RequestData

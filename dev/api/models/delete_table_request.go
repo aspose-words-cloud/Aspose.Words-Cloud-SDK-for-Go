@@ -56,6 +56,9 @@ type DeleteTableRequest struct {
     Optionals map[string]interface{}
 }
 
+func (data *DeleteTableRequest) GetOriginalRequest() RequestInterface {
+    return data
+}
 
 func (data *DeleteTableRequest) CreateRequestData() (RequestData, error) {
     var result RequestData

@@ -57,6 +57,9 @@ type InsertFormFieldOnlineRequest struct {
     Optionals map[string]interface{}
 }
 
+func (data *InsertFormFieldOnlineRequest) GetOriginalRequest() RequestInterface {
+    return data
+}
 
 func (data *InsertFormFieldOnlineRequest) CreateRequestData() (RequestData, error) {
     var result RequestData

@@ -52,6 +52,9 @@ type DeleteFieldsOnlineRequest struct {
     Optionals map[string]interface{}
 }
 
+func (data *DeleteFieldsOnlineRequest) GetOriginalRequest() RequestInterface {
+    return data
+}
 
 func (data *DeleteFieldsOnlineRequest) CreateRequestData() (RequestData, error) {
     var result RequestData

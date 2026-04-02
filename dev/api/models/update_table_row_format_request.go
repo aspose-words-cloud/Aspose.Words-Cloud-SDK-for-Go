@@ -60,6 +60,9 @@ type UpdateTableRowFormatRequest struct {
     Optionals map[string]interface{}
 }
 
+func (data *UpdateTableRowFormatRequest) GetOriginalRequest() RequestInterface {
+    return data
+}
 
 func (data *UpdateTableRowFormatRequest) CreateRequestData() (RequestData, error) {
     var result RequestData

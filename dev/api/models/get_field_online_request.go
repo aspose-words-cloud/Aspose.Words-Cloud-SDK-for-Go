@@ -52,6 +52,9 @@ type GetFieldOnlineRequest struct {
     Optionals map[string]interface{}
 }
 
+func (data *GetFieldOnlineRequest) GetOriginalRequest() RequestInterface {
+    return data
+}
 
 func (data *GetFieldOnlineRequest) CreateRequestData() (RequestData, error) {
     var result RequestData

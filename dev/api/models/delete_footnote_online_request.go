@@ -54,6 +54,9 @@ type DeleteFootnoteOnlineRequest struct {
     Optionals map[string]interface{}
 }
 
+func (data *DeleteFootnoteOnlineRequest) GetOriginalRequest() RequestInterface {
+    return data
+}
 
 func (data *DeleteFootnoteOnlineRequest) CreateRequestData() (RequestData, error) {
     var result RequestData

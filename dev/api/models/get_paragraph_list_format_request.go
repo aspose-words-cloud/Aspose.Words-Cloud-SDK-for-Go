@@ -54,6 +54,9 @@ type GetParagraphListFormatRequest struct {
     Optionals map[string]interface{}
 }
 
+func (data *GetParagraphListFormatRequest) GetOriginalRequest() RequestInterface {
+    return data
+}
 
 func (data *GetParagraphListFormatRequest) CreateRequestData() (RequestData, error) {
     var result RequestData

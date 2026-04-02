@@ -56,6 +56,9 @@ type DeleteFormFieldRequest struct {
     Optionals map[string]interface{}
 }
 
+func (data *DeleteFormFieldRequest) GetOriginalRequest() RequestInterface {
+    return data
+}
 
 func (data *DeleteFormFieldRequest) CreateRequestData() (RequestData, error) {
     var result RequestData

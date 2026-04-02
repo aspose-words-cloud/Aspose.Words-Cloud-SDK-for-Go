@@ -50,6 +50,9 @@ type GetTablesOnlineRequest struct {
     Optionals map[string]interface{}
 }
 
+func (data *GetTablesOnlineRequest) GetOriginalRequest() RequestInterface {
+    return data
+}
 
 func (data *GetTablesOnlineRequest) CreateRequestData() (RequestData, error) {
     var result RequestData

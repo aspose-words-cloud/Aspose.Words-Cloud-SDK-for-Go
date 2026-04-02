@@ -46,6 +46,9 @@ type GetFilesListRequest struct {
     Optionals map[string]interface{}
 }
 
+func (data *GetFilesListRequest) GetOriginalRequest() RequestInterface {
+    return data
+}
 
 func (data *GetFilesListRequest) CreateRequestData() (RequestData, error) {
     var result RequestData

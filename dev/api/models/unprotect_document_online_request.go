@@ -50,6 +50,9 @@ type UnprotectDocumentOnlineRequest struct {
     Optionals map[string]interface{}
 }
 
+func (data *UnprotectDocumentOnlineRequest) GetOriginalRequest() RequestInterface {
+    return data
+}
 
 func (data *UnprotectDocumentOnlineRequest) CreateRequestData() (RequestData, error) {
     var result RequestData

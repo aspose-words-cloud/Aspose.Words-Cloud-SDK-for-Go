@@ -53,6 +53,9 @@ type DeleteBookmarksRequest struct {
     Optionals map[string]interface{}
 }
 
+func (data *DeleteBookmarksRequest) GetOriginalRequest() RequestInterface {
+    return data
+}
 
 func (data *DeleteBookmarksRequest) CreateRequestData() (RequestData, error) {
     var result RequestData

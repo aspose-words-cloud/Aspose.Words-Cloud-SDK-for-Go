@@ -55,6 +55,9 @@ type DeleteCustomXmlPartRequest struct {
     Optionals map[string]interface{}
 }
 
+func (data *DeleteCustomXmlPartRequest) GetOriginalRequest() RequestInterface {
+    return data
+}
 
 func (data *DeleteCustomXmlPartRequest) CreateRequestData() (RequestData, error) {
     var result RequestData

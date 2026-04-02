@@ -51,6 +51,9 @@ type GetDocumentHyperlinkByIndexOnlineRequest struct {
     Optionals map[string]interface{}
 }
 
+func (data *GetDocumentHyperlinkByIndexOnlineRequest) GetOriginalRequest() RequestInterface {
+    return data
+}
 
 func (data *GetDocumentHyperlinkByIndexOnlineRequest) CreateRequestData() (RequestData, error) {
     var result RequestData

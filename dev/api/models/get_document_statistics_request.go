@@ -54,6 +54,9 @@ type GetDocumentStatisticsRequest struct {
     Optionals map[string]interface{}
 }
 
+func (data *GetDocumentStatisticsRequest) GetOriginalRequest() RequestInterface {
+    return data
+}
 
 func (data *GetDocumentStatisticsRequest) CreateRequestData() (RequestData, error) {
     var result RequestData

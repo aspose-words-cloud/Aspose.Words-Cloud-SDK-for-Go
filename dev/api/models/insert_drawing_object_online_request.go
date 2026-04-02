@@ -58,6 +58,9 @@ type InsertDrawingObjectOnlineRequest struct {
     Optionals map[string]interface{}
 }
 
+func (data *InsertDrawingObjectOnlineRequest) GetOriginalRequest() RequestInterface {
+    return data
+}
 
 func (data *InsertDrawingObjectOnlineRequest) CreateRequestData() (RequestData, error) {
     var result RequestData

@@ -56,6 +56,9 @@ type InsertBookmarkRequest struct {
     Optionals map[string]interface{}
 }
 
+func (data *InsertBookmarkRequest) GetOriginalRequest() RequestInterface {
+    return data
+}
 
 func (data *InsertBookmarkRequest) CreateRequestData() (RequestData, error) {
     var result RequestData

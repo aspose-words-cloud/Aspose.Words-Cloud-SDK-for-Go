@@ -59,6 +59,9 @@ type UpdateBorderRequest struct {
     Optionals map[string]interface{}
 }
 
+func (data *UpdateBorderRequest) GetOriginalRequest() RequestInterface {
+    return data
+}
 
 func (data *UpdateBorderRequest) CreateRequestData() (RequestData, error) {
     var result RequestData

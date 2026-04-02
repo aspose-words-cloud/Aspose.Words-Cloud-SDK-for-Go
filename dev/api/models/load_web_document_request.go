@@ -45,6 +45,9 @@ type LoadWebDocumentRequest struct {
     Optionals map[string]interface{}
 }
 
+func (data *LoadWebDocumentRequest) GetOriginalRequest() RequestInterface {
+    return data
+}
 
 func (data *LoadWebDocumentRequest) CreateRequestData() (RequestData, error) {
     var result RequestData

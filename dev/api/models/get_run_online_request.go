@@ -53,6 +53,9 @@ type GetRunOnlineRequest struct {
     Optionals map[string]interface{}
 }
 
+func (data *GetRunOnlineRequest) GetOriginalRequest() RequestInterface {
+    return data
+}
 
 func (data *GetRunOnlineRequest) CreateRequestData() (RequestData, error) {
     var result RequestData

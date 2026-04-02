@@ -58,6 +58,9 @@ type UpdateCommentRequest struct {
     Optionals map[string]interface{}
 }
 
+func (data *UpdateCommentRequest) GetOriginalRequest() RequestInterface {
+    return data
+}
 
 func (data *UpdateCommentRequest) CreateRequestData() (RequestData, error) {
     var result RequestData

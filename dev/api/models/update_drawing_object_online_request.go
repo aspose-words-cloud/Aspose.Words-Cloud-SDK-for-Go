@@ -60,6 +60,9 @@ type UpdateDrawingObjectOnlineRequest struct {
     Optionals map[string]interface{}
 }
 
+func (data *UpdateDrawingObjectOnlineRequest) GetOriginalRequest() RequestInterface {
+    return data
+}
 
 func (data *UpdateDrawingObjectOnlineRequest) CreateRequestData() (RequestData, error) {
     var result RequestData

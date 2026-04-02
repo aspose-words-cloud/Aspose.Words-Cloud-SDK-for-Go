@@ -53,6 +53,9 @@ type GetBookmarkByNameRequest struct {
     Optionals map[string]interface{}
 }
 
+func (data *GetBookmarkByNameRequest) GetOriginalRequest() RequestInterface {
+    return data
+}
 
 func (data *GetBookmarkByNameRequest) CreateRequestData() (RequestData, error) {
     var result RequestData

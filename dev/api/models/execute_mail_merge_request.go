@@ -59,6 +59,9 @@ type ExecuteMailMergeRequest struct {
     Optionals map[string]interface{}
 }
 
+func (data *ExecuteMailMergeRequest) GetOriginalRequest() RequestInterface {
+    return data
+}
 
 func (data *ExecuteMailMergeRequest) CreateRequestData() (RequestData, error) {
     var result RequestData

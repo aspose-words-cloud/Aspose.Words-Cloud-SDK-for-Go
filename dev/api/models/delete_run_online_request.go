@@ -55,6 +55,9 @@ type DeleteRunOnlineRequest struct {
     Optionals map[string]interface{}
 }
 
+func (data *DeleteRunOnlineRequest) GetOriginalRequest() RequestInterface {
+    return data
+}
 
 func (data *DeleteRunOnlineRequest) CreateRequestData() (RequestData, error) {
     var result RequestData

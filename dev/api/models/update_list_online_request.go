@@ -57,6 +57,9 @@ type UpdateListOnlineRequest struct {
     Optionals map[string]interface{}
 }
 
+func (data *UpdateListOnlineRequest) GetOriginalRequest() RequestInterface {
+    return data
+}
 
 func (data *UpdateListOnlineRequest) CreateRequestData() (RequestData, error) {
     var result RequestData

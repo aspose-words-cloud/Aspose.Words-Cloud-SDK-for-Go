@@ -54,6 +54,9 @@ type RemoveRangeOnlineRequest struct {
     Optionals map[string]interface{}
 }
 
+func (data *RemoveRangeOnlineRequest) GetOriginalRequest() RequestInterface {
+    return data
+}
 
 func (data *RemoveRangeOnlineRequest) CreateRequestData() (RequestData, error) {
     var result RequestData

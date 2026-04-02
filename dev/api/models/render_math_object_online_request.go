@@ -55,6 +55,9 @@ type RenderMathObjectOnlineRequest struct {
     Optionals map[string]interface{}
 }
 
+func (data *RenderMathObjectOnlineRequest) GetOriginalRequest() RequestInterface {
+    return data
+}
 
 func (data *RenderMathObjectOnlineRequest) CreateRequestData() (RequestData, error) {
     var result RequestData

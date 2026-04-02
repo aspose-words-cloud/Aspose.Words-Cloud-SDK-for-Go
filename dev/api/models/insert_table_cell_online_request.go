@@ -56,6 +56,9 @@ type InsertTableCellOnlineRequest struct {
     Optionals map[string]interface{}
 }
 
+func (data *InsertTableCellOnlineRequest) GetOriginalRequest() RequestInterface {
+    return data
+}
 
 func (data *InsertTableCellOnlineRequest) CreateRequestData() (RequestData, error) {
     var result RequestData

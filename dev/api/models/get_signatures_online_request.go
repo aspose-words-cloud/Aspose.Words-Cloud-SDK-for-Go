@@ -48,6 +48,9 @@ type GetSignaturesOnlineRequest struct {
     Optionals map[string]interface{}
 }
 
+func (data *GetSignaturesOnlineRequest) GetOriginalRequest() RequestInterface {
+    return data
+}
 
 func (data *GetSignaturesOnlineRequest) CreateRequestData() (RequestData, error) {
     var result RequestData

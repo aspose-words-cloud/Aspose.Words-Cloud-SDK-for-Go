@@ -54,6 +54,9 @@ type DeleteOfficeMathObjectOnlineRequest struct {
     Optionals map[string]interface{}
 }
 
+func (data *DeleteOfficeMathObjectOnlineRequest) GetOriginalRequest() RequestInterface {
+    return data
+}
 
 func (data *DeleteOfficeMathObjectOnlineRequest) CreateRequestData() (RequestData, error) {
     var result RequestData

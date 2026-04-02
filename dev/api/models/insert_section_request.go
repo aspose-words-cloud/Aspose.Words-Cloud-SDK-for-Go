@@ -55,6 +55,9 @@ type InsertSectionRequest struct {
     Optionals map[string]interface{}
 }
 
+func (data *InsertSectionRequest) GetOriginalRequest() RequestInterface {
+    return data
+}
 
 func (data *InsertSectionRequest) CreateRequestData() (RequestData, error) {
     var result RequestData

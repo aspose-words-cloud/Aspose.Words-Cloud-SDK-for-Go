@@ -55,6 +55,9 @@ type RemoveRangeRequest struct {
     Optionals map[string]interface{}
 }
 
+func (data *RemoveRangeRequest) GetOriginalRequest() RequestInterface {
+    return data
+}
 
 func (data *RemoveRangeRequest) CreateRequestData() (RequestData, error) {
     var result RequestData

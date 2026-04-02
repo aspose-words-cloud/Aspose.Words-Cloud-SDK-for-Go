@@ -50,6 +50,9 @@ type ExecuteMailMergeOnlineRequest struct {
     Optionals map[string]interface{}
 }
 
+func (data *ExecuteMailMergeOnlineRequest) GetOriginalRequest() RequestInterface {
+    return data
+}
 
 func (data *ExecuteMailMergeOnlineRequest) CreateRequestData() (RequestData, error) {
     var result RequestData

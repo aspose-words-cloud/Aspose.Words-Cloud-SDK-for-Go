@@ -57,6 +57,9 @@ type ApplyStyleToDocumentElementOnlineRequest struct {
     Optionals map[string]interface{}
 }
 
+func (data *ApplyStyleToDocumentElementOnlineRequest) GetOriginalRequest() RequestInterface {
+    return data
+}
 
 func (data *ApplyStyleToDocumentElementOnlineRequest) CreateRequestData() (RequestData, error) {
     var result RequestData

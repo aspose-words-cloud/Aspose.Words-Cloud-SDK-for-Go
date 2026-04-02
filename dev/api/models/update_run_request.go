@@ -60,6 +60,9 @@ type UpdateRunRequest struct {
     Optionals map[string]interface{}
 }
 
+func (data *UpdateRunRequest) GetOriginalRequest() RequestInterface {
+    return data
+}
 
 func (data *UpdateRunRequest) CreateRequestData() (RequestData, error) {
     var result RequestData

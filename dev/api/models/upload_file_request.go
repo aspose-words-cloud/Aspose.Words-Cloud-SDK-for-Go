@@ -48,6 +48,9 @@ type UploadFileRequest struct {
     Optionals map[string]interface{}
 }
 
+func (data *UploadFileRequest) GetOriginalRequest() RequestInterface {
+    return data
+}
 
 func (data *UploadFileRequest) CreateRequestData() (RequestData, error) {
     var result RequestData

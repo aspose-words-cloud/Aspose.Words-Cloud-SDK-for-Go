@@ -43,6 +43,7 @@ import (
 type RequestInterface interface {
     CreateRequestData() (request RequestData, err error)
     CreateResponse(reader io.Reader, boundary string) (response interface{}, err error)
+    GetOriginalRequest() RequestInterface
 }
 
 // RequestData contains requst data

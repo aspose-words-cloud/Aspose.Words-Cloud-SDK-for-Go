@@ -54,6 +54,9 @@ type ProtectDocumentRequest struct {
     Optionals map[string]interface{}
 }
 
+func (data *ProtectDocumentRequest) GetOriginalRequest() RequestInterface {
+    return data
+}
 
 func (data *ProtectDocumentRequest) CreateRequestData() (RequestData, error) {
     var result RequestData

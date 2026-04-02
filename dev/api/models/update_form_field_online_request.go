@@ -58,6 +58,9 @@ type UpdateFormFieldOnlineRequest struct {
     Optionals map[string]interface{}
 }
 
+func (data *UpdateFormFieldOnlineRequest) GetOriginalRequest() RequestInterface {
+    return data
+}
 
 func (data *UpdateFormFieldOnlineRequest) CreateRequestData() (RequestData, error) {
     var result RequestData

@@ -53,6 +53,9 @@ type RenderPageOnlineRequest struct {
     Optionals map[string]interface{}
 }
 
+func (data *RenderPageOnlineRequest) GetOriginalRequest() RequestInterface {
+    return data
+}
 
 func (data *RenderPageOnlineRequest) CreateRequestData() (RequestData, error) {
     var result RequestData

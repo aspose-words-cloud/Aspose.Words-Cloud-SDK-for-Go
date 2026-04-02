@@ -54,6 +54,9 @@ type DeleteHeadersFootersOnlineRequest struct {
     Optionals map[string]interface{}
 }
 
+func (data *DeleteHeadersFootersOnlineRequest) GetOriginalRequest() RequestInterface {
+    return data
+}
 
 func (data *DeleteHeadersFootersOnlineRequest) CreateRequestData() (RequestData, error) {
     var result RequestData

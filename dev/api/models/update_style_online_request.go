@@ -57,6 +57,9 @@ type UpdateStyleOnlineRequest struct {
     Optionals map[string]interface{}
 }
 
+func (data *UpdateStyleOnlineRequest) GetOriginalRequest() RequestInterface {
+    return data
+}
 
 func (data *UpdateStyleOnlineRequest) CreateRequestData() (RequestData, error) {
     var result RequestData

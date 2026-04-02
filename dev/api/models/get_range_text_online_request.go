@@ -52,6 +52,9 @@ type GetRangeTextOnlineRequest struct {
     Optionals map[string]interface{}
 }
 
+func (data *GetRangeTextOnlineRequest) GetOriginalRequest() RequestInterface {
+    return data
+}
 
 func (data *GetRangeTextOnlineRequest) CreateRequestData() (RequestData, error) {
     var result RequestData

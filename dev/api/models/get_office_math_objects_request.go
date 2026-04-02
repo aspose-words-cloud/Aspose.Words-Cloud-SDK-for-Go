@@ -52,6 +52,9 @@ type GetOfficeMathObjectsRequest struct {
     Optionals map[string]interface{}
 }
 
+func (data *GetOfficeMathObjectsRequest) GetOriginalRequest() RequestInterface {
+    return data
+}
 
 func (data *GetOfficeMathObjectsRequest) CreateRequestData() (RequestData, error) {
     var result RequestData

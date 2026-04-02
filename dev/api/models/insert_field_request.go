@@ -57,6 +57,9 @@ type InsertFieldRequest struct {
     Optionals map[string]interface{}
 }
 
+func (data *InsertFieldRequest) GetOriginalRequest() RequestInterface {
+    return data
+}
 
 func (data *InsertFieldRequest) CreateRequestData() (RequestData, error) {
     var result RequestData

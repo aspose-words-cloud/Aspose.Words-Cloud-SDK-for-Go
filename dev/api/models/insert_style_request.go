@@ -56,6 +56,9 @@ type InsertStyleRequest struct {
     Optionals map[string]interface{}
 }
 
+func (data *InsertStyleRequest) GetOriginalRequest() RequestInterface {
+    return data
+}
 
 func (data *InsertStyleRequest) CreateRequestData() (RequestData, error) {
     var result RequestData

@@ -50,6 +50,9 @@ type DeleteMacrosOnlineRequest struct {
     Optionals map[string]interface{}
 }
 
+func (data *DeleteMacrosOnlineRequest) GetOriginalRequest() RequestInterface {
+    return data
+}
 
 func (data *DeleteMacrosOnlineRequest) CreateRequestData() (RequestData, error) {
     var result RequestData

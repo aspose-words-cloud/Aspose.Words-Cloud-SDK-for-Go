@@ -49,6 +49,9 @@ type MoveFileRequest struct {
     Optionals map[string]interface{}
 }
 
+func (data *MoveFileRequest) GetOriginalRequest() RequestInterface {
+    return data
+}
 
 func (data *MoveFileRequest) CreateRequestData() (RequestData, error) {
     var result RequestData

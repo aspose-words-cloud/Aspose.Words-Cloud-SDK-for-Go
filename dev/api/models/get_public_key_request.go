@@ -40,6 +40,9 @@ import (
 type GetPublicKeyRequest struct {
 }
 
+func (data *GetPublicKeyRequest) GetOriginalRequest() RequestInterface {
+    return data
+}
 
 func (data *GetPublicKeyRequest) CreateRequestData() (RequestData, error) {
     var result RequestData

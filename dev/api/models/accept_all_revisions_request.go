@@ -52,6 +52,9 @@ type AcceptAllRevisionsRequest struct {
     Optionals map[string]interface{}
 }
 
+func (data *AcceptAllRevisionsRequest) GetOriginalRequest() RequestInterface {
+    return data
+}
 
 func (data *AcceptAllRevisionsRequest) CreateRequestData() (RequestData, error) {
     var result RequestData

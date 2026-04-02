@@ -59,6 +59,9 @@ type UpdateTablePropertiesRequest struct {
     Optionals map[string]interface{}
 }
 
+func (data *UpdateTablePropertiesRequest) GetOriginalRequest() RequestInterface {
+    return data
+}
 
 func (data *UpdateTablePropertiesRequest) CreateRequestData() (RequestData, error) {
     var result RequestData

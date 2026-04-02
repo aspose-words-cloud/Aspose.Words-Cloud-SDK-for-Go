@@ -54,6 +54,9 @@ type CopyStyleOnlineRequest struct {
     Optionals map[string]interface{}
 }
 
+func (data *CopyStyleOnlineRequest) GetOriginalRequest() RequestInterface {
+    return data
+}
 
 func (data *CopyStyleOnlineRequest) CreateRequestData() (RequestData, error) {
     var result RequestData

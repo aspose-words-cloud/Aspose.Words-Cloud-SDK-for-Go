@@ -56,6 +56,9 @@ type DeleteParagraphListFormatOnlineRequest struct {
     Optionals map[string]interface{}
 }
 
+func (data *DeleteParagraphListFormatOnlineRequest) GetOriginalRequest() RequestInterface {
+    return data
+}
 
 func (data *DeleteParagraphListFormatOnlineRequest) CreateRequestData() (RequestData, error) {
     var result RequestData

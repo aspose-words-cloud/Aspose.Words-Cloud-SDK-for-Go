@@ -51,6 +51,9 @@ type GetSectionsRequest struct {
     Optionals map[string]interface{}
 }
 
+func (data *GetSectionsRequest) GetOriginalRequest() RequestInterface {
+    return data
+}
 
 func (data *GetSectionsRequest) CreateRequestData() (RequestData, error) {
     var result RequestData

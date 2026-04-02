@@ -53,6 +53,9 @@ type GetRunFontOnlineRequest struct {
     Optionals map[string]interface{}
 }
 
+func (data *GetRunFontOnlineRequest) GetOriginalRequest() RequestInterface {
+    return data
+}
 
 func (data *GetRunFontOnlineRequest) CreateRequestData() (RequestData, error) {
     var result RequestData

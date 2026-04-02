@@ -51,6 +51,9 @@ type GetDocumentHyperlinksRequest struct {
     Optionals map[string]interface{}
 }
 
+func (data *GetDocumentHyperlinksRequest) GetOriginalRequest() RequestInterface {
+    return data
+}
 
 func (data *GetDocumentHyperlinksRequest) CreateRequestData() (RequestData, error) {
     var result RequestData

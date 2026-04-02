@@ -56,6 +56,9 @@ type DeleteDrawingObjectRequest struct {
     Optionals map[string]interface{}
 }
 
+func (data *DeleteDrawingObjectRequest) GetOriginalRequest() RequestInterface {
+    return data
+}
 
 func (data *DeleteDrawingObjectRequest) CreateRequestData() (RequestData, error) {
     var result RequestData

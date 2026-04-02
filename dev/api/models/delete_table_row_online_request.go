@@ -55,6 +55,9 @@ type DeleteTableRowOnlineRequest struct {
     Optionals map[string]interface{}
 }
 
+func (data *DeleteTableRowOnlineRequest) GetOriginalRequest() RequestInterface {
+    return data
+}
 
 func (data *DeleteTableRowOnlineRequest) CreateRequestData() (RequestData, error) {
     var result RequestData

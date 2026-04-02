@@ -53,6 +53,9 @@ type GetDocumentPropertyRequest struct {
     Optionals map[string]interface{}
 }
 
+func (data *GetDocumentPropertyRequest) GetOriginalRequest() RequestInterface {
+    return data
+}
 
 func (data *GetDocumentPropertyRequest) CreateRequestData() (RequestData, error) {
     var result RequestData

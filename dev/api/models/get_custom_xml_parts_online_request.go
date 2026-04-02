@@ -48,6 +48,9 @@ type GetCustomXmlPartsOnlineRequest struct {
     Optionals map[string]interface{}
 }
 
+func (data *GetCustomXmlPartsOnlineRequest) GetOriginalRequest() RequestInterface {
+    return data
+}
 
 func (data *GetCustomXmlPartsOnlineRequest) CreateRequestData() (RequestData, error) {
     var result RequestData

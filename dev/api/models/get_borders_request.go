@@ -52,6 +52,9 @@ type GetBordersRequest struct {
     Optionals map[string]interface{}
 }
 
+func (data *GetBordersRequest) GetOriginalRequest() RequestInterface {
+    return data
+}
 
 func (data *GetBordersRequest) CreateRequestData() (RequestData, error) {
     var result RequestData

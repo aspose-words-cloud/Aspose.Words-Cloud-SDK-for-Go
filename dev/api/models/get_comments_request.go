@@ -51,6 +51,9 @@ type GetCommentsRequest struct {
     Optionals map[string]interface{}
 }
 
+func (data *GetCommentsRequest) GetOriginalRequest() RequestInterface {
+    return data
+}
 
 func (data *GetCommentsRequest) CreateRequestData() (RequestData, error) {
     var result RequestData

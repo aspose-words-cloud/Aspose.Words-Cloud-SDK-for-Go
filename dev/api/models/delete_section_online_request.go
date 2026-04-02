@@ -53,6 +53,9 @@ type DeleteSectionOnlineRequest struct {
     Optionals map[string]interface{}
 }
 
+func (data *DeleteSectionOnlineRequest) GetOriginalRequest() RequestInterface {
+    return data
+}
 
 func (data *DeleteSectionOnlineRequest) CreateRequestData() (RequestData, error) {
     var result RequestData

@@ -55,6 +55,9 @@ type RenderDrawingObjectOnlineRequest struct {
     Optionals map[string]interface{}
 }
 
+func (data *RenderDrawingObjectOnlineRequest) GetOriginalRequest() RequestInterface {
+    return data
+}
 
 func (data *RenderDrawingObjectOnlineRequest) CreateRequestData() (RequestData, error) {
     var result RequestData

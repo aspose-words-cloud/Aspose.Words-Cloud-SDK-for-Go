@@ -240,3 +240,33 @@ func Test_ConvertDocument_ConvertDocument(t *testing.T) {
     }
 
 }
+
+// A test for ConvertDocument as a job.
+func Test_ConvertDocument_ConvertDocumentJob(t *testing.T) {
+    config := ReadConfiguration(t)
+    client, ctx := PrepareTest(t, config)
+    localFolder := "DocumentActions/ConvertDocument"
+
+    requestDocument := OpenFile(t, localFolder + "/test_uploadfile.docx")
+
+    options := map[string]interface{}{
+    }
+
+    request := &models.ConvertDocumentJobRequest{
+        Document: requestDocument,
+        Format: ToStringPointer("pdf"),
+        Optionals: options,
+    }
+
+    jobHandler, _, err := client.WordsApi.ConvertDocumentJob(ctx, request)
+    if err == nil {
+        _, err := jobHandler.WaitResult()
+        if err != nil {
+            t.Error(err)
+        }
+    }
+    if err != nil {
+        t.Error(err)
+    }
+
+}

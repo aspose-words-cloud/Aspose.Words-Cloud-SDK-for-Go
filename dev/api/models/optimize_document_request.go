@@ -55,6 +55,9 @@ type OptimizeDocumentRequest struct {
     Optionals map[string]interface{}
 }
 
+func (data *OptimizeDocumentRequest) GetOriginalRequest() RequestInterface {
+    return data
+}
 
 func (data *OptimizeDocumentRequest) CreateRequestData() (RequestData, error) {
     var result RequestData

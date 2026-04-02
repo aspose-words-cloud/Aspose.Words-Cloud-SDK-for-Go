@@ -48,6 +48,9 @@ type CopyFolderRequest struct {
     Optionals map[string]interface{}
 }
 
+func (data *CopyFolderRequest) GetOriginalRequest() RequestInterface {
+    return data
+}
 
 func (data *CopyFolderRequest) CreateRequestData() (RequestData, error) {
     var result RequestData

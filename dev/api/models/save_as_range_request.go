@@ -56,6 +56,9 @@ type SaveAsRangeRequest struct {
     Optionals map[string]interface{}
 }
 
+func (data *SaveAsRangeRequest) GetOriginalRequest() RequestInterface {
+    return data
+}
 
 func (data *SaveAsRangeRequest) CreateRequestData() (RequestData, error) {
     var result RequestData

@@ -56,6 +56,9 @@ type GetHeaderFooterOfSectionRequest struct {
     Optionals map[string]interface{}
 }
 
+func (data *GetHeaderFooterOfSectionRequest) GetOriginalRequest() RequestInterface {
+    return data
+}
 
 func (data *GetHeaderFooterOfSectionRequest) CreateRequestData() (RequestData, error) {
     var result RequestData

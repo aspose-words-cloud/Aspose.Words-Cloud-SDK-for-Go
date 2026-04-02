@@ -57,6 +57,9 @@ type InsertStructuredDocumentTagRequest struct {
     Optionals map[string]interface{}
 }
 
+func (data *InsertStructuredDocumentTagRequest) GetOriginalRequest() RequestInterface {
+    return data
+}
 
 func (data *InsertStructuredDocumentTagRequest) CreateRequestData() (RequestData, error) {
     var result RequestData

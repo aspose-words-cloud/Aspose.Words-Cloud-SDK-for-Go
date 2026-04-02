@@ -48,6 +48,9 @@ type GetAllRevisionsOnlineRequest struct {
     Optionals map[string]interface{}
 }
 
+func (data *GetAllRevisionsOnlineRequest) GetOriginalRequest() RequestInterface {
+    return data
+}
 
 func (data *GetAllRevisionsOnlineRequest) CreateRequestData() (RequestData, error) {
     var result RequestData

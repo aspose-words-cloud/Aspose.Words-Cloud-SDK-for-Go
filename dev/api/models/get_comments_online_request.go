@@ -48,6 +48,9 @@ type GetCommentsOnlineRequest struct {
     Optionals map[string]interface{}
 }
 
+func (data *GetCommentsOnlineRequest) GetOriginalRequest() RequestInterface {
+    return data
+}
 
 func (data *GetCommentsOnlineRequest) CreateRequestData() (RequestData, error) {
     var result RequestData
