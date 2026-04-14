@@ -62,6 +62,40 @@ func Test_ExecuteMailMerge_ExecuteMailMergeOnline(t *testing.T) {
 
 }
 
+// Test for executing mail merge online job.
+func Test_ExecuteMailMerge_ExecuteMailMergeOnlineJob(t *testing.T) {
+    config := ReadConfiguration(t)
+    client, ctx := PrepareTest(t, config)
+    mailMergeFolder := "DocumentActions/MailMerge"
+    localDocumentFile := "SampleExecuteTemplate.docx"
+    localDataFile := "SampleExecuteTemplateData.txt"
+
+    requestTemplate := OpenFile(t, mailMergeFolder + "/" + localDocumentFile)
+    requestData := OpenFile(t, mailMergeFolder + "/" + localDataFile)
+
+    options := map[string]interface{}{
+        "withRegions": true,
+    }
+
+    request := &models.ExecuteMailMergeOnlineJobRequest{
+        Template: requestTemplate,
+        Data: requestData,
+        Optionals: options,
+    }
+
+    jobHandler, _, err := client.WordsApi.ExecuteMailMergeOnlineJob(ctx, request)
+    if err == nil {
+        _, err := jobHandler.WaitResult()
+        if err != nil {
+            t.Error(err)
+        }
+    }
+    if err != nil {
+        t.Error(err)
+    }
+
+}
+
 // Test for executing mail merge.
 func Test_ExecuteMailMerge_ExecuteMailMerge(t *testing.T) {
     config := ReadConfiguration(t)
@@ -94,4 +128,46 @@ func Test_ExecuteMailMerge_ExecuteMailMerge(t *testing.T) {
 
     assert.NotNil(t, actual.GetDocument(), "Validate ExecuteMailMerge response.");
     assert.Equal(t, "TestExecuteMailMerge.docx", DereferenceValue(actual.GetDocument().GetFileName()), "Validate ExecuteMailMerge response.");
+}
+
+// Test for executing mail merge job.
+func Test_ExecuteMailMerge_ExecuteMailMergeJob(t *testing.T) {
+    config := ReadConfiguration(t)
+    client, ctx := PrepareTest(t, config)
+    remoteDataFolder := remoteBaseTestDataFolder + "/DocumentActions/MailMerge"
+    mailMergeFolder := "DocumentActions/MailMerge"
+    localDocumentFile := "SampleExecuteTemplate.docx"
+    remoteFileName := "TestExecuteMailMerge.docx"
+    localDataFile := ReadFile(t, mailMergeFolder + "/SampleMailMergeTemplateData.txt")
+
+    UploadNextFileToStorage(t, ctx, client, GetLocalFile(mailMergeFolder + "/" + localDocumentFile), remoteDataFolder + "/" + remoteFileName)
+
+
+    options := map[string]interface{}{
+        "data": localDataFile,
+        "folder": remoteDataFolder,
+        "withRegions": true,
+        "destFileName": baseTestOutPath + "/" + remoteFileName,
+    }
+
+    request := &models.ExecuteMailMergeJobRequest{
+        Name: ToStringPointer(remoteFileName),
+        Optionals: options,
+    }
+
+    var actual models.DocumentResponse
+    jobHandler, _, err := client.WordsApi.ExecuteMailMergeJob(ctx, request)
+    if err == nil {
+        actualRaw, err := jobHandler.WaitResult()
+        if err != nil {
+            t.Error(err)
+        }
+        actual = actualRaw.(models.DocumentResponse)
+    }
+    if err != nil {
+        t.Error(err)
+    }
+
+    assert.NotNil(t, actual.GetDocument(), "Validate ExecuteMailMergeJob response.");
+    assert.Equal(t, "TestExecuteMailMerge.docx", DereferenceValue(actual.GetDocument().GetFileName()), "Validate ExecuteMailMergeJob response.");
 }

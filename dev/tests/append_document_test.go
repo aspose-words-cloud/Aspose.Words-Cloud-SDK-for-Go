@@ -76,6 +76,56 @@ func Test_AppendDocument_AppendDocument(t *testing.T) {
     assert.Equal(t, "TestAppendDocument.docx", DereferenceValue(actual.GetDocument().GetFileName()), "Validate AppendDocument response.");
 }
 
+// Test for appending document job.
+func Test_AppendDocument_AppendDocumentJob(t *testing.T) {
+    config := ReadConfiguration(t)
+    client, ctx := PrepareTest(t, config)
+    remoteDataFolder := remoteBaseTestDataFolder + "/DocumentActions/AppendDocument"
+    localFile := "Common/test_multi_pages.docx"
+    remoteFileName := "TestAppendDocument.docx"
+
+    UploadNextFileToStorage(t, ctx, client, GetLocalFile(localFile), remoteDataFolder + "/" + remoteFileName)
+
+    requestDocumentListDocumentEntries0FileReference := models.CreateRemoteFileReference(remoteDataFolder + "/" + remoteFileName)
+    requestDocumentListDocumentEntries0 := models.DocumentEntry{
+        FileReference: &requestDocumentListDocumentEntries0FileReference,
+        ImportFormatMode: ToStringPointer("KeepSourceFormatting"),
+    }
+    requestDocumentListDocumentEntries := []models.IDocumentEntry{
+        &requestDocumentListDocumentEntries0,
+    }
+    requestDocumentList := models.DocumentEntryList{
+        DocumentEntries: requestDocumentListDocumentEntries,
+    }
+
+    options := map[string]interface{}{
+        "folder": remoteDataFolder,
+        "destFileName": baseTestOutPath + "/" + remoteFileName,
+    }
+
+    request := &models.AppendDocumentJobRequest{
+        Name: ToStringPointer(remoteFileName),
+        DocumentList: &requestDocumentList,
+        Optionals: options,
+    }
+
+    var actual models.DocumentResponse
+    jobHandler, _, err := client.WordsApi.AppendDocumentJob(ctx, request)
+    if err == nil {
+        actualRaw, err := jobHandler.WaitResult()
+        if err != nil {
+            t.Error(err)
+        }
+        actual = actualRaw.(models.DocumentResponse)
+    }
+    if err != nil {
+        t.Error(err)
+    }
+
+    assert.NotNil(t, actual.GetDocument(), "Validate AppendDocumentJob response.");
+    assert.Equal(t, "TestAppendDocument.docx", DereferenceValue(actual.GetDocument().GetFileName()), "Validate AppendDocumentJob response.");
+}
+
 // Test for appending document online.
 func Test_AppendDocument_AppendDocumentOnline(t *testing.T) {
     config := ReadConfiguration(t)
@@ -106,6 +156,48 @@ func Test_AppendDocument_AppendDocumentOnline(t *testing.T) {
     }
 
     _, _, err := client.WordsApi.AppendDocumentOnline(ctx, request)
+    if err != nil {
+        t.Error(err)
+    }
+
+}
+
+// Test for appending document online job.
+func Test_AppendDocument_AppendDocumentOnlineJob(t *testing.T) {
+    config := ReadConfiguration(t)
+    client, ctx := PrepareTest(t, config)
+    localFile := "Common/test_multi_pages.docx"
+
+    requestDocument := OpenFile(t, localFile)
+    requestDocumentListDocumentEntries0FileReferenceStream := OpenFile(t, localFile)
+    requestDocumentListDocumentEntries0FileReference := models.CreateLocalFileReference(requestDocumentListDocumentEntries0FileReferenceStream)
+    requestDocumentListDocumentEntries0 := models.DocumentEntry{
+        FileReference: &requestDocumentListDocumentEntries0FileReference,
+        ImportFormatMode: ToStringPointer("KeepSourceFormatting"),
+    }
+    requestDocumentListDocumentEntries := []models.IDocumentEntry{
+        &requestDocumentListDocumentEntries0,
+    }
+    requestDocumentList := models.DocumentEntryList{
+        DocumentEntries: requestDocumentListDocumentEntries,
+    }
+
+    options := map[string]interface{}{
+    }
+
+    request := &models.AppendDocumentOnlineJobRequest{
+        Document: requestDocument,
+        DocumentList: &requestDocumentList,
+        Optionals: options,
+    }
+
+    jobHandler, _, err := client.WordsApi.AppendDocumentOnlineJob(ctx, request)
+    if err == nil {
+        _, err := jobHandler.WaitResult()
+        if err != nil {
+            t.Error(err)
+        }
+    }
     if err != nil {
         t.Error(err)
     }
