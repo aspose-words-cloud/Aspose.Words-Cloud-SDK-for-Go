@@ -40,6 +40,7 @@ import (
     "mime/multipart"
     "net/http"
     "net/url"
+    "reflect"
     "strings"
     "time"
 
@@ -262,7 +263,30 @@ func deserializeJobResponsePart(request models.RequestInterface, part *multipart
     }
 
     boundary := getBoundary(headers["Content-Type"])
-    return request.CreateResponse(bytes.NewReader(body), boundary)
+    result, err := request.CreateResponse(bytes.NewReader(body), boundary)
+    if err != nil {
+        return nil, err
+    }
+
+    return normalizeJobResult(result), nil
+}
+
+func normalizeJobResult(result interface{}) interface{} {
+    if result == nil {
+        return nil
+    }
+
+    value := reflect.ValueOf(result)
+    if value.Kind() != reflect.Ptr || value.IsNil() {
+        return result
+    }
+
+    element := value.Elem()
+    if !element.IsValid() || element.Kind() != reflect.Struct {
+        return result
+    }
+
+    return element.Interface()
 }
 
 func dereferenceString(value *string) string {
