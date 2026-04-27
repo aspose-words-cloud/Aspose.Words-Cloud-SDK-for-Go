@@ -50,5 +50,6 @@ node('win2019_1') {
         }
 	} finally {
 		deleteDir( )
+		cleanWs()
 	}
 }
