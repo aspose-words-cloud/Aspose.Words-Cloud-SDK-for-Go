@@ -10991,6 +10991,108 @@ func (a *WordsApiService) InsertDrawingObject(ctx context.Context, data *models.
     return successPayload, response, err
 }
 
+/* WordsApiService Inserts a new DrawingObject to the document node. The image is passed by reference: a storage path in the document folder or its subfolders, an HTTP(S) URL, or a request part.
+ * @param ctx context.Context for authentication, logging, tracing, etc.
+ * @data operation request data.
+@return models.DrawingObjectResponse*/
+func (a *WordsApiService) InsertDrawingObjectByReference(ctx context.Context, data *models.InsertDrawingObjectByReferenceRequest) (models.DrawingObjectResponse, *http.Response, error) {
+    var (
+        successPayload models.DrawingObjectResponse
+    )
+
+    requestData, err := data.CreateRequestData();
+    if err != nil {
+        return successPayload, nil, err
+    }
+
+    requestData.Path = a.client.cfg.BaseUrl + requestData.Path;
+
+    r, err := a.client.prepareRequest(ctx, requestData)
+    if err != nil {
+        return successPayload, nil, err
+    }
+
+    response, err := a.client.callAPI(r)
+
+    if err != nil || response == nil {
+        return successPayload, nil, err
+    }
+
+    defer response.Body.Close()
+
+    if response.StatusCode == 401 {
+        return successPayload, nil, errors.New("Access is denied")
+    }
+    if response.StatusCode >= 300 {
+        var apiError models.WordsApiErrorResponse;
+        var jsonMap map[string]interface{}
+        if err = json.NewDecoder(response.Body).Decode(&jsonMap); err != nil {
+            return successPayload, nil, err
+        }
+
+        apiError.Deserialize(jsonMap)
+        return successPayload, response, &apiError
+    }
+    var jsonMap map[string]interface{}
+    if err = json.NewDecoder(response.Body).Decode(&jsonMap); err != nil {
+        return successPayload, response, err
+    }
+
+    successPayload.Deserialize(jsonMap)
+    return successPayload, response, err
+}
+
+/* WordsApiService Inserts a new DrawingObject to the document node. The image is passed by reference: a storage path in the document folder or its subfolders, an HTTP(S) URL, or a request part.
+ * @param ctx context.Context for authentication, logging, tracing, etc.
+ * @data operation request data.
+@return InsertDrawingObjectByReferenceOnlineResponse*/
+func (a *WordsApiService) InsertDrawingObjectByReferenceOnline(ctx context.Context, data *models.InsertDrawingObjectByReferenceOnlineRequest) (models.InsertDrawingObjectByReferenceOnlineResponse, *http.Response, error) {
+    var (
+        successPayload models.InsertDrawingObjectByReferenceOnlineResponse
+    )
+
+    requestData, err := data.CreateRequestData();
+    if err != nil {
+        return successPayload, nil, err
+    }
+
+    requestData.Path = a.client.cfg.BaseUrl + requestData.Path;
+
+    r, err := a.client.prepareRequest(ctx, requestData)
+    if err != nil {
+        return successPayload, nil, err
+    }
+
+    response, err := a.client.callAPI(r)
+
+    if err != nil || response == nil {
+        return successPayload, nil, err
+    }
+
+
+    if response.StatusCode == 401 {
+        return successPayload, nil, errors.New("Access is denied")
+    }
+    if response.StatusCode >= 300 {
+        var apiError models.WordsApiErrorResponse;
+        var jsonMap map[string]interface{}
+        if err = json.NewDecoder(response.Body).Decode(&jsonMap); err != nil {
+            return successPayload, nil, err
+        }
+
+        apiError.Deserialize(jsonMap)
+        return successPayload, response, &apiError
+    }
+    boundary := GetBoundary(response)
+    result, err := data.CreateResponse(response.Body, boundary)
+
+    if err != nil {
+        return successPayload, response, err
+    }
+
+    return result.(models.InsertDrawingObjectByReferenceOnlineResponse), response, err
+}
+
 /* WordsApiService Inserts a new DrawingObject to the document node.
  * @param ctx context.Context for authentication, logging, tracing, etc.
  * @data operation request data.

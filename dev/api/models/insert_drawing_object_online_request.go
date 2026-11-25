@@ -174,6 +174,7 @@ func (data *InsertDrawingObjectOnlineRequest) CreateRequestData() (RequestData, 
     }
 
     result.FormParams = append(result.FormParams, NewJsonFormParamContainer("DrawingObject", parameterToString(data.DrawingObject, "")))
+    filesContentData = data.DrawingObject.CollectFilesContent(filesContentData)
 
     _imageFile := data.ImageFile
     if _imageFile != nil {
