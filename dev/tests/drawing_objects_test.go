@@ -558,6 +558,85 @@ func Test_DrawingObjects_InsertDrawingObjectWithoutNodePath(t *testing.T) {
 
 }
 
+// Test for adding drawing object with the image from the storage.
+func Test_DrawingObjects_InsertDrawingObjectByReference(t *testing.T) {
+    config := ReadConfiguration(t)
+    client, ctx := PrepareTest(t, config)
+    remoteDataFolder := remoteBaseTestDataFolder + "/DocumentElements/DrawingObjectss"
+    localFile := "Common/test_multi_pages.docx"
+    remoteFileName := "TestInsertDrawingObjectByReference.docx"
+    remoteImagePath := remoteDataFolder + "/TestInsertDrawingObjectByReference.png"
+
+    UploadNextFileToStorage(t, ctx, client, GetLocalFile(localFile), remoteDataFolder + "/" + remoteFileName)
+    UploadNextFileToStorage(t, ctx, client, GetLocalFile("Common/aspose-cloud.png"), remoteImagePath)
+
+    requestDrawingObjectImageReference := models.CreateRemoteFileReference(remoteImagePath)
+    requestDrawingObject := models.DrawingObjectInsertData{
+        Height: ToFloat64Pointer(0),
+        Left: ToFloat64Pointer(0),
+        Top: ToFloat64Pointer(0),
+        Width: ToFloat64Pointer(0),
+        RelativeHorizontalPosition: ToStringPointer("Margin"),
+        RelativeVerticalPosition: ToStringPointer("Margin"),
+        WrapType: ToStringPointer("Inline"),
+        ImageReference: &requestDrawingObjectImageReference,
+    }
+
+    options := map[string]interface{}{
+        "nodePath": "",
+        "folder": remoteDataFolder,
+    }
+
+    request := &models.InsertDrawingObjectByReferenceRequest{
+        Name: ToStringPointer(remoteFileName),
+        DrawingObject: &requestDrawingObject,
+        Optionals: options,
+    }
+
+    _, _, err := client.WordsApi.InsertDrawingObjectByReference(ctx, request)
+    if err != nil {
+        t.Error(err)
+    }
+
+}
+
+// Test for adding drawing object online with the image from the request.
+func Test_DrawingObjects_InsertDrawingObjectByReferenceOnline(t *testing.T) {
+    config := ReadConfiguration(t)
+    client, ctx := PrepareTest(t, config)
+    localFile := "Common/test_multi_pages.docx"
+
+    requestDocument := OpenFile(t, localFile)
+    requestDrawingObjectImageReferenceStream := OpenFile(t, "Common/aspose-cloud.png")
+    requestDrawingObjectImageReference := models.CreateLocalFileReference(requestDrawingObjectImageReferenceStream)
+    requestDrawingObject := models.DrawingObjectInsertData{
+        Height: ToFloat64Pointer(0),
+        Left: ToFloat64Pointer(0),
+        Top: ToFloat64Pointer(0),
+        Width: ToFloat64Pointer(0),
+        RelativeHorizontalPosition: ToStringPointer("Margin"),
+        RelativeVerticalPosition: ToStringPointer("Margin"),
+        WrapType: ToStringPointer("Inline"),
+        ImageReference: &requestDrawingObjectImageReference,
+    }
+
+    options := map[string]interface{}{
+        "nodePath": "",
+    }
+
+    request := &models.InsertDrawingObjectByReferenceOnlineRequest{
+        Document: requestDocument,
+        DrawingObject: &requestDrawingObject,
+        Optionals: options,
+    }
+
+    _, _, err := client.WordsApi.InsertDrawingObjectByReferenceOnline(ctx, request)
+    if err != nil {
+        t.Error(err)
+    }
+
+}
+
 // Test for deleting drawing object.
 func Test_DrawingObjects_DeleteDrawingObject(t *testing.T) {
     config := ReadConfiguration(t)
